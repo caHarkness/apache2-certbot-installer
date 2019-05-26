@@ -2,8 +2,24 @@
 
 if [ "$#" -lt 1 ]
 then
-	echo "Usage: $0 domain [domain...]" >&2
-	exit 1
+    echo "Usage: $0 domain [domain...]" >&2
+    exit 1
+fi
+
+echo ""
+echo "WARNING:"
+echo "This script is about to STOP the apache2 service in order to create Let's Encrypt certificates and verify domain authenticity. The apache2 service will restart after this completes."
+echo ""
+echo "Is '$CERTBOT_EMAIL' the correct e-mail address?"
+echo ""
+
+read -p "Type 'YES' if you wish to continue " PROMPT
+if [[ $PROMPT == "YES" ]]
+then
+    echo "OK."
+else
+    echo "Aborted."
+    exit 0
 fi
 
 OPENSSL_DOMAINS="DNS:$1"
@@ -12,9 +28,28 @@ CERTBOT_DOMAINS="$1"
 shift
 for x in "$@"
 do
-	OPENSSL_DOMAINS="${OPENSSL_DOMAINS},DNS:${x}"
-	CERTBOT_DOMAINS="${CERTBOT_DOMAINS},${x}"
+    OPENSSL_DOMAINS="${OPENSSL_DOMAINS},DNS:${x}"
+    CERTBOT_DOMAINS="${CERTBOT_DOMAINS},${x}"
 done
+
+echo ""
+echo "WARNING:"
+echo "The following files are going to be deleted if they already exist:"
+echo "$CSR_PATH"
+echo "$CERT_PATH"
+echo "$KEY_PATH"
+echo "$FULLCHAIN_PATH"
+echo "$CHAIN_PATH"
+echo ""
+
+read -p "Type 'YES' if you wish to continue " PROMPT
+if [[ $PROMPT == "YES" ]]
+then
+    echo "OK."
+else
+    echo "Aborted."
+    exit 0
+fi
 
 rm -rf ${CSR_PATH}
 rm -rf ${CERT_PATH}
@@ -51,5 +86,4 @@ bash ${CERTBOT_DIR}/certbot-auto certonly \
     --chain-path ${CHAIN_PATH} \
     --config-dir ${CONFIG_DIR}
 
-a2enmod ssl
 service apache2 start

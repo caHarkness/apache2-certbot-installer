@@ -1,5 +1,19 @@
 #!/bin/bash
 
+echo ""
+echo "WARNING:"
+echo "This script is about to create Apache site configurations from 'sites.list'"
+echo ""
+
+read -p "Type 'YES' if you wish to continue " PROMPT
+if [[ $PROMPT == "YES" ]]
+then
+    echo "OK."
+else
+    echo "Aborted."
+    exit 0
+fi
+
 TEMP=""
 
 #
@@ -15,14 +29,15 @@ chmod -R 0755 $WEB_ROOT
 #
 #   Warn about deleting the site configuration files
 #
+echo ""
 echo "WARNING:"
 echo "This script is about to delete the contents of the following directories:"
 echo $SITES_ENABLED_DIR
 echo $SITES_AVAILABLE_DIR
 echo ""
 
-read -p "Type 'Y' if you wish to continue " PROMPT
-if [[ $PROMPT == "Y" ]]
+read -p "Type 'YES' if you wish to continue " PROMPT
+if [[ $PROMPT == "YES" ]]
 then
     echo "OK."
 else
