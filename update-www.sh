@@ -22,7 +22,7 @@ echo ""
 read -p "Type 'Y' if you wish to continue " PROMPT
 if [[ $PROMPT == "Y" ]]
 then
-    # Continue
+    echo "OK."
 else
     echo "Aborted."
     exit 0
