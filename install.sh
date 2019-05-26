@@ -5,7 +5,8 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
-export CURRENT_DIR="$(realpath "$0")"
+export REAL_PATH="$(realpath "$0")"
+export CURRENT_DIR="$(dirname "$REAL_PATH")"
 export CERTBOT_URL="https://github.com/letsencrypt/letsencrypt"
 export CERTBOT_DIR="$CURRENT_DIR/certbot"
 export SSL_DIR="$CURRENT_DIR/ssl"
