@@ -8,6 +8,8 @@ TEMP=""
 chown -R www-data:www-data $SITES_ENABLED_DIR
 chown -R www-data:www-data $SITES_AVAILABLE_DIR
 chown -R www-data:www-data $WEB_ROOT
+chmod -R 0755 $SITES_ENABLED_DIR
+chmod -R 0755 $SITES_AVAILABLE_DIR
 chmod -R 0755 $WEB_ROOT
 
 #
@@ -83,10 +85,10 @@ do
     #
     #   Create the symbolic links to "enable" the sites in Apache
     #
-    ln -s "$HTTP_FILE" "$HTTP_SYMLINK"
+    ln -sf "$HTTP_FILE" "$HTTP_SYMLINK"
     echo "Linked '$HTTP_FILE' to '$HTTP_SYMLINK'"
 
-    ln -s "$HTTPS_FILE" "$HTTPS_SYMLINK"
+    ln -sf "$HTTPS_FILE" "$HTTPS_SYMLINK"
     echo "Linked '$HTTPS_FILE' to '$HTTPS_SYMLINK'"
 
     #

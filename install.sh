@@ -22,25 +22,6 @@ cd "$CURRENT_DIR"
 source settings.sh
 
 #
-#   Warn about deleting the Certbot directory
-#
-echo "WARNING:"
-echo "This script is about to delete the contents of the following directories:"
-echo $CERTBOT_DIR
-echo ""
-
-read -p "Type 'Y' if you wish to continue " PROMPT
-if [[ $PROMPT == "Y" ]]
-then
-    echo "OK."
-else
-    echo "Aborted."
-    exit 0
-fi
-
-rm -rf "$CERTBOT_DIR"
-
-#
 #   Warn about cloning Certbot and writing to the certificate directory
 #
 echo "WARNING:"

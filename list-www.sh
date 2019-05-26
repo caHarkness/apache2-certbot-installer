@@ -8,15 +8,12 @@ TEMP=""
 
 while read LINE;
 do
-    HTTP_CONFIG="$(<template.conf)"
-    HTTPS_CONFIG="$(<template-ssl.conf)"
-    
     IFS=" "
     set - $LINE
-    SRV_NAME=$1
-    DOC_ROOT=$2
+    SERVER_NAME=$1
+    DOCUMENT_ROOT=$2
 
-    TEMP="$TEMP$SRV_NAME "
+    TEMP="$TEMP$SERVER_NAME "
 done < "sites.list"
 
 echo "$TEMP"
