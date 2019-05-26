@@ -18,7 +18,7 @@ export CONFIG_DIR="${SSL_DIR}/config"
 
 cd "$CURRENT_DIR"
 
-./settings.sh
+source settings.sh
 
 #
 #   Warn about deleting the Certbot directory
@@ -63,8 +63,8 @@ then
     git clone "$CERTBOT_URL" "$CERTBOT_DIR"
 fi
 
-./update-www.sh
-./update-www-ssl.sh $(./list-www.sh)
+source update-www.sh
+source update-www-ssl.sh $(source list-www.sh)
 
 chown -R www-data:www-data "$WEB_ROOT"
 chmod -R 0755 "$WEB_ROOT"
