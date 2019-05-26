@@ -51,4 +51,5 @@ bash ${CERTBOT_DIR}/certbot-auto certonly \
     --chain-path ${CHAIN_PATH} \
     --config-dir ${CONFIG_DIR}
 
+a2enmod ssl
 service apache2 start
