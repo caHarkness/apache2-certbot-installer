@@ -62,8 +62,9 @@ then
     echo "Cloning Certbot..."
     git clone "$CERTBOT_URL" "$CERTBOT_DIR"
 fi
+
 ./update-www.sh
-./update-www-ssl.sh $(./list-www)
+./update-www-ssl.sh $(./list-www.sh)
 
 chown -R www-data:www-data "$WEB_ROOT"
 chmod -R 0755 "$WEB_ROOT"
